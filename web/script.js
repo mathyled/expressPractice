@@ -1,3 +1,4 @@
+
 const formElement = document.getElementById("saveTransaction")
 
 formElement.addEventListener("submit", (event)=>{
@@ -7,5 +8,17 @@ formElement.addEventListener("submit", (event)=>{
 // console.log(transactionDescription,transactionPrice)
 const transaction = { transactionDescription, transactionPrice}
 const transactionJson = JSON.stringify(transaction)
-console.log(transactionJson)
+// console.log(transactionJson)
+
+fetch('http://localhost:3000/transactions', {
+    method:'Post',
+    body: transactionJson
 })
+.then(alert("Transaccion exitosa"))
+})
+
+
+fetch("http://localhost:3000/transactions", { // se renderiza cada vez que recargo la pág
+    method:"Get"
+})
+.then(x=> x.json()).then(console.log)

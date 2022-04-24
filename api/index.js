@@ -4,14 +4,33 @@ const cors = require("cors")
 const app = express()
 const port = 3000
 
+app.use(
+    express.urlencoded({
+        extended:true
+    })
+)
+
+app.use(express.json({
+    type:"*/*"
+}))
+
+app.use(cors())
 
 
+let transactions = [];
+
+
+// get a http://localhost:3000/transactions
 app.get("/transactions",(req,res) =>{
-    res.send("Me hcieron un get")
+    // console.log(transactions)
+    res.send(JSON.stringify(transactions))
 })
 
 app.post("/transactions", (req,res) =>{
-    res.send("Me hicieron un post")
+   
+  let transaction = req.body;
+  transactions.push(transaction)
+  console.log(transactions)
 })
 
 
